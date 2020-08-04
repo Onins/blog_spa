@@ -1,6 +1,8 @@
 <template>
   <div>
-    <a href='#'>LOGIN</a>
+    <div class="login">
+      <a href='#' class="login-link">LOGIN</a>
+    </div>
   </div>
 </template>
 

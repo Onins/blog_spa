@@ -1,5 +1,11 @@
 .header {
-  padding: 20px 15px;
+  width: 100%;
+  position: relative;
+}
+
+.header-wrapper {
   display: flex;
   justify-content: space-between;
+  padding-top: 36px;
+  padding-bottom: 33px;
 }
