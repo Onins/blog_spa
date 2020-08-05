@@ -8,16 +8,16 @@
         </div>
       </div>
       <ul class="news-list" >
-        <li class="news-item" v-for="(news, i) in this.newsBlog" :key="i">
-          <nuxt-link to="/post">
+        <li  v-for="(news, i) in this.getAllPosts" :key="i">
+          <nuxt-link class="news-item" to="/post" @click="setId(news.id)">
             <div class="news-item__image" style="background-image: url('https://via.placeholder.com/150')"></div>
             <span class="news-item__date" v-if="news.createdAt != null">{{ (news.createdAt).match(/^([\S]+)/g).toString().replace(/[[\]]/g,'') }}</span>
             <p class="news-item__text">{{ news.title }}</p>
           </nuxt-link>
         </li>
       </ul>
-      <div class="news__load-more" v-if="this.disableLoad == false">
-        <button @click="$fetch" class="news__load-button">LOAD MORE</button>
+      <div class="news__load-more" v-if="this.getLoadMoreState == false">
+        <button @click="loadMore()" class="news__load-button">LOAD MORE</button>
       </div>
     </div>
   </div>
@@ -26,64 +26,35 @@
 <script>
 // import {mapActions, mapState} from 'vuex'
 import { createNamespacedHelpers } from 'vuex'
-import axios from 'axios'
-const { mapState, mapGetters, mapMutations } = createNamespacedHelpers('posts')
+const { mapGetters, mapMutations, mapActions } = createNamespacedHelpers('news')
 
 export default {
   computed: {
-    ...mapState(['allPosts']),
-    ...mapGetters(['getAllPosts', 'getPostOffset', "getPostLimit"])
+    ...mapGetters(['getAllPosts', 'getPostOffset', "getPostLimit", "getLoadMoreState"])
   },
+
+  middleware: 'newsList',
 
   data() {
     return {
-      newsBlog: [],
-      tempBlog: [],
-      loadCount: 0,
-      disableLoad: false
+      loadCount: 0      
     }
   },
 
   methods: {
-    ...mapMutations(["setPosts", "setOffset"])
-  },
+    ...mapMutations(["setPosts", "setOffset", "setNews"]),
+    ...mapActions(["loadNews"]),
 
-  async fetch() {
-    let data = JSON.stringify({
-      query: 'query{\n  posts(\n    pagination: {\n      limit: '+this.getPostLimit+',\n      offset: '+this.getPostOffset+'\n    }\n  ){\n    id, title, image, createdAt\n  }\n}',
-      variables: {}
-    });
+    setId(id) {
+      this.setNews(id);
+    },
 
-    let config = {
-      method: 'post',
-      url: 'http://localhost:4000/graphql',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-
-    await axios(config)
-    .then((response)=>{
-      this.tempBlog.push(response.data.data.posts)
-      this.setPosts(Array.prototype.concat.apply([], this.tempBlog));
-      this.newsBlog = this.getAllPosts;
-      
-      //Increase post offset
-      this.setOffset(this.getPostOffset + 6);
-
-      //Disalbe load more if there are no more post
-      
-      if(this.tempBlog[this.loadCount].length < 6) {
-        this.disableLoad = true;
-      }
-      this.loadCount += 1;
-      
-    })  
-  },
-
-  mounted() {
-    
+    loadMore(){
+      this.loadNews({
+        count: this.loadCount, 
+        offset: this.getPostOffset
+      });
+    }
   }
   
 }
