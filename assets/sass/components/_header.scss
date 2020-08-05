@@ -1,9 +1,10 @@
 .header {
   width: 100%;
   position: relative;
+  z-index: 1;
 }
 
-.header-wrapper {
+.header__wrapper {
   display: flex;
   justify-content: space-between;
   padding-top: 36px;

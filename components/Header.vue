@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="l-container header-wrapper">
+    <div class="l-container header__wrapper">
       <h1>
         <a href="/">
           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="147.857" height="30" viewBox="0 0 147.857 30">
@@ -19,7 +19,7 @@ import Login from "~/components/Login.vue"
 export default {
   components: {
     Login
-  }
+  }  
 }
 </script>
 

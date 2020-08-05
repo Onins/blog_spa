@@ -1,0 +1,21 @@
+.breadcrumbs {
+  background-color: $color-bg-tertiary;
+  width: 100%;
+}
+
+.breadcrumbs__wrapper {
+  display: flex;
+  list-style: none;
+  padding: 29px 0 26px;
+}
+
+.breadcrumbs__item {
+  font-size: 16px;
+  font-family: $base-jp-font-reg;
+  margin-right: 12px;
+  letter-spacing: 0.09em;
+}
+
+.breadcrumbs__link {
+  color: $color-text-primary;
+}
