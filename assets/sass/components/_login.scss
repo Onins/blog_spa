@@ -10,6 +10,10 @@
   letter-spacing: 0.1em;
   cursor: pointer;
   outline: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .login-modal {

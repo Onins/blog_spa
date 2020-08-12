@@ -46,6 +46,11 @@
   padding: 40px 27px 35px;
   flex-direction: column;
   margin: 0 25px 60px;
+  color: $color-text-primary;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .news-item__image {

@@ -5,8 +5,7 @@ export const state = () => ({
   batchPosts: [],
   postLimit: 6,
   offset: 6,
-  loadMoreState: false,
-  newsSelect: ""
+  loadMoreState: false
 })
 
 export const getters = {
@@ -14,7 +13,6 @@ export const getters = {
   getBatchPosts: (state) => state.batchPosts,
   getPostLimit: (state) => state.postLimit,
   getPostOffset: (state) => state.offset,
-  getNewsSelect: (state) => state.newsSelect,
   getLoadMoreState: (state) => state.loadMoreState
 }
 
@@ -22,7 +20,6 @@ export const mutations = {
   setPosts: (state, getAllPosts) => (state.allPosts = getAllPosts),
   setBatchPosts: (state, getBatchPosts) => (state.batchPosts = getBatchPosts),
   setOffset: (state, getPostOffset) => (state.offset = getPostOffset),
-  setNews: (state, getNewsSelect) => (state.newsSelect = getNewsSelect),
   setLoadMoreState: (state, getLoadMoreState) => (state.loadMoreState = getLoadMoreState)
 }
 

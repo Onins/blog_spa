@@ -51,6 +51,6 @@ export default {
     }
   },
   router: {
-    middleware: 'newsList'
+    middleware: ['authenticate']
   }
 }

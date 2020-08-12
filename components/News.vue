@@ -4,12 +4,12 @@
       <div class="news-header">
         <h3 class="news-header__text">NEWS</h3>
         <div class="news-header__post">
-          <a href="" class="news-header__post-link">Create New Post</a>
+          <button class="news-header__post-link" v-if="getLogin == 'true'">Create New Post</button>
         </div>
       </div>
       <ul class="news-list" >
-        <li  v-for="(news, i) in this.getAllPosts" :key="i">
-          <nuxt-link class="news-item" to="/post" @click="setId(news.id)">
+        <li v-for="(news, i) in this.getAllPosts" :key="i">
+          <nuxt-link class="news-item" :to="'/news/'+ news.id">
             <div class="news-item__image" style="background-image: url('https://via.placeholder.com/150')"></div>
             <span class="news-item__date" v-if="news.createdAt != null">{{ (news.createdAt).match(/^([\S]+)/g).toString().replace(/[[\]]/g,'') }}</span>
             <p class="news-item__text">{{ news.title }}</p>
@@ -24,16 +24,13 @@
 </template>
 
 <script>
-// import {mapActions, mapState} from 'vuex'
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters, mapMutations, mapActions } = createNamespacedHelpers('news')
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['getAllPosts', 'getPostOffset', "getPostLimit", "getLoadMoreState"])
+    ...mapGetters('news',['getAllPosts', 'getPostOffset', 'getLoadMoreState']),
+    ...mapGetters('user', ['getAuth', 'getLogin']) 
   },
-
-  middleware: 'newsList',
 
   data() {
     return {
@@ -42,12 +39,8 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["setPosts", "setOffset", "setNews"]),
-    ...mapActions(["loadNews"]),
-
-    setId(id) {
-      this.setNews(id);
-    },
+    ...mapMutations('news', ['setPosts', 'setOffset']),
+    ...mapActions('news',['loadNews']),
 
     loadMore(){
       this.loadNews({

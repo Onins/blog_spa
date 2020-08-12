@@ -10,13 +10,18 @@
         >
       </li>
       <li class="breadcrumbs__item">
-        test
+        {{ getPostData.title }}
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions, mapState } from 'vuex'
+
 export default {
+  computed: {
+    ...mapGetters('post', ['getPostData'])
+  },
 }
 </script>

@@ -6,7 +6,7 @@
 .breadcrumbs__wrapper {
   display: flex;
   list-style: none;
-  padding: 29px 0 26px;
+  padding: 29px 15px 26px;
 }
 
 .breadcrumbs__item {
@@ -18,4 +18,8 @@
 
 .breadcrumbs__link {
   color: $color-text-primary;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
