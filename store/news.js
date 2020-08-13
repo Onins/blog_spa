@@ -26,7 +26,7 @@ export const mutations = {
 export const actions = {
   async loadNews({commit, state}, data) {
     let jsonData = JSON.stringify({
-      query: 'query{\n  posts(\n    pagination: {\n      limit: 6,\n      offset: '+data.offset+'\n    }\n  ){\n    id, title, image, createdAt\n  }\n}',
+      query: 'query{\n  posts(\n    pagination: {\n      limit: '+data.limit+',\n      offset: '+data.offset+'\n    }\n  ){\n    id, title, image, createdAt\n  }\n}',
       variables: {}
     });
   
@@ -47,7 +47,8 @@ export const actions = {
       }
       tempNews.push(state.allPosts);
       tempNews.push(response.data.data.posts);
-      commit('setPosts', Array.prototype.concat.apply([], tempNews));      
+      commit('setPosts', Array.prototype.concat.apply([], tempNews));
+      commit('setOffset', data.offset + data.limit);    
     })
 }
 }

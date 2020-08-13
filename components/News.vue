@@ -4,7 +4,7 @@
       <div class="news-header">
         <h3 class="news-header__text">NEWS</h3>
         <div class="news-header__post">
-          <button class="news-header__post-link" v-if="getLogin == 'true'">Create New Post</button>
+          <nuxt-link :to="'/create'" class="news-header__post-link" v-if="getLogin == 'true'">Create New Post</nuxt-link>
         </div>
       </div>
       <ul class="news-list" >
@@ -45,7 +45,8 @@ export default {
     loadMore(){
       this.loadNews({
         count: this.loadCount, 
-        offset: this.getPostOffset
+        offset: this.getPostOffset,
+        limit: 6
       });
     }
   }

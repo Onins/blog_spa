@@ -70,6 +70,7 @@ export default {
     getAuth: function () {
       if (this.getAuth) {
         localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('auth', this.getAuth);
         this.setLogin("true");
       }
     }
@@ -157,8 +158,10 @@ export default {
 
     logout(){
       localStorage.setItem('isLoggedIn', false);
+      localStorage.setItem('auth', "");
       this.setAuth(false);
       this.setLogin("false");
+      this.$router.push('/');
     },
 
     resetFields() {

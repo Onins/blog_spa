@@ -30,6 +30,8 @@
   color: $color-text-primary;
   text-decoration: underline;
   letter-spacing: 0.09em;
+  cursor: pointer;
+  color: $color-text-primary;
 }
 
 .news-list {
@@ -47,6 +49,7 @@
   flex-direction: column;
   margin: 0 25px 60px;
   color: $color-text-primary;
+  min-height: 366px;
 
   &:hover {
     text-decoration: underline;
@@ -73,6 +76,10 @@
   font-size: 20px;
   line-height: 1.6;
   letter-spacing: 0.01em;
+  display: inline;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .news__load-more {

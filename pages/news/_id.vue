@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Breadcrumbs/>
+    <Breadcrumbs :isCreate="isCreate"/>
     <div class="post">
       <div class="post__wrapper l-container">
         <div class="post__edit">
-          <button class="post__edit-link" v-if="getLogin == 'true'">Edit Post</button>
+          <nuxt-link :to="'/edit'" class="post__edit-link" v-if="getLogin == 'true'">Edit Post</nuxt-link>
         </div>
         <p class="post__date">{{ getPostData.createdAt ? (getPostData.createdAt).match(/^([\S]+)/g).toString().replace(/[[\]]/g,'') : "" }}</p>
         <h2 class="post__title">{{ getPostData.title }}</h2>
@@ -45,7 +45,8 @@ export default {
   data() {
     return {
       postData: [],
-      comment: ""
+      comment: "",
+      isCreate: false
     }
   },
   components: {
