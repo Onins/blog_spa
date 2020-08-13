@@ -3,20 +3,24 @@ import axios from 'axios'
 
 export const state = () => ({
   isLoggedIn: false,
-  authCode: "",
-  isRegistered: false
+  isRegistered: false,
+  isModalOpen: false,
+  authCode: ""
+  
 })
 
 export const getters = {
   getLogin: (state) => state.isLoggedIn, 
   getAuth: (state) => state.authCode,
   getRegStat: (state) => state.isRegistered,
+  getModalOpen: (state) => state.isModalOpen,
 }
 
 export const mutations = {
   setLogin: (state, getLogin) => (state.isLoggedIn = getLogin),
   setAuth: (state, getAuth) => (state.authCode = getAuth),
-  setRegStat: (state, getRegStat) => (state.isRegistered = getRegStat)
+  setRegStat: (state, getRegStat) => (state.isRegistered = getRegStat),
+  setModalOpen: (state, getModalOpen) => (state.isModalOpen = getModalOpen)
 }
 
 export const actions = {

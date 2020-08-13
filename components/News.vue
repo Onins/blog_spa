@@ -4,7 +4,7 @@
       <div class="news-header">
         <h3 class="news-header__text">NEWS</h3>
         <div class="news-header__post">
-          <nuxt-link :to="'/create'" class="news-header__post-link" v-if="getLogin == 'true'">Create New Post</nuxt-link>
+          <nuxt-link :to="'/post'" class="news-header__post-link" v-if="getLogin == 'true'">Create New Post</nuxt-link>
         </div>
       </div>
       <ul class="news-list" >
@@ -29,13 +29,21 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters('news',['getAllPosts', 'getPostOffset', 'getLoadMoreState']),
-    ...mapGetters('user', ['getAuth', 'getLogin']) 
+    ...mapGetters('user', ['getAuth', 'getLogin'])
   },
 
   data() {
     return {
       loadCount: 0      
     }
+  },
+
+  beforeRouteEnter (to, from, next) { 
+    next(vm => { 
+      this.setOffset(6);
+      console.log('set6');
+      next();
+    }) 
   },
 
   methods: {

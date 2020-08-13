@@ -4,7 +4,7 @@
     <div class="post">
       <div class="post__wrapper l-container">
         <div class="post__edit">
-          <nuxt-link :to="'/edit'" class="post__edit-link" v-if="getLogin == 'true'">Edit Post</nuxt-link>
+          <nuxt-link :to="'/post'" class="post__edit-link" v-if="getLogin == 'true'">Edit Post</nuxt-link>
         </div>
         <p class="post__date">{{ getPostData.createdAt ? (getPostData.createdAt).match(/^([\S]+)/g).toString().replace(/[[\]]/g,'') : "" }}</p>
         <h2 class="post__title">{{ getPostData.title }}</h2>
@@ -52,8 +52,18 @@ export default {
   components: {
     Breadcrumbs
   },
+  
+  beforeRouteLeave: function(to, from, next) {
+    if (to.name != "post") {
+      this.setPostData([]);
+      console.log("exit");
+    }
+    next();
+  },
+
   methods: {
-    ...mapActions('post',['postComment', 'getPostContent']),
+    ...mapActions('post', ['postComment', 'fetchPostContent']),
+    ...mapMutations('post', ['setPostData']),
 
     doGetTime(data) {
       let date = new Date();
@@ -95,7 +105,7 @@ export default {
     doAddComment() {
       if (this.comment != "") {
         this.postComment(this.comment);
-        this.getPostContent();
+        this.fetchPostContent();
         this.postData = this.getPostData;
         this.comment = "";
       }

@@ -2,17 +2,23 @@ import axios from 'axios';
 
 export const state = () => ({
   postData: [],
-  postId: ''
+  postId: '',
+  postState: {
+    isCreate: true,
+    isUpdate: false
+  }
 })
 
 export const getters = {
   getPostData: (state) => state.postData,
-  getPostId: (state) => state.postId
+  getPostId: (state) => state.postId,
+  getPostState: (state) => state.postState,
 }
 
 export const mutations = {
   setPostData: (state, getPostData) => (state.postData = getPostData),
-  setPostId: (state, getPostId) => (state.postId = getPostId)
+  setPostId: (state, getPostId) => (state.postId = getPostId),
+  setPostState: (state, getPostState) => (state.postState = getPostState)
 }
 
 export const actions = {
@@ -33,7 +39,7 @@ export const actions = {
   
     axios(config) 
   },
-  async getPostContent({state, commit}) {
+  async fetchPostContent({state, commit}) {
     let result;
     let data = JSON.stringify({
       query: 'query{\n  post(\n   id: '+ state.postId +'\n  ){\n    id, title, content, image, createdAt, comments {\n      id, content, createdAt\n    }\n  }\n}',

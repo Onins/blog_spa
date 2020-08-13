@@ -9,6 +9,9 @@
       <li class="breadcrumbs__item">
         >
       </li>
+      <li class="breadcrumbs__item" v-if="custom">
+        {{ custom }}
+      </li>
       <li class="breadcrumbs__item" v-if="!isCreate">
         {{ getPostData.title }}
       </li>
@@ -28,7 +31,8 @@ export default {
     ...mapGetters('post', ['getPostData'])
   },
   props: {
-    isCreate: Boolean
+    isCreate: Boolean,
+    custom: String
   }
 }
 </script>

@@ -5,7 +5,7 @@
 
       <button @click="logout()" class="login-link" v-if="getLogin == 'true'">LOGOUT</button>
     </div>
-    <div class="login-modal" :class="{'open': isModalOpen}">
+    <div class="login-modal" :class="{'open': getModalOpen}">
       <!-- Login -->
       <div class="login-modal__wrapper" v-if="formSelected == 'login'">
         <p class="login-modal__header">LOGIN</p>
@@ -49,7 +49,6 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {  
   data() {
     return {
-      isModalOpen: false,
       modalText: 'LOGIN',
       formSelected: 'login',
       loginError: '',
@@ -62,8 +61,16 @@ export default {
     }
   },
 
+  head () {
+    return {
+      bodyAttrs: {
+        class: this.getModalOpen ? 'is-open' : ''
+      }
+    }
+  },
+
   computed: {
-    ...mapGetters('user', ['getAuth', 'getRegStat', 'getLogin'])
+    ...mapGetters('user', ['getAuth', 'getRegStat', 'getLogin', 'getModalOpen'])
   },
 
   watch: {
@@ -77,17 +84,17 @@ export default {
   },
 
   methods: {
-    ...mapMutations('user', ['setAuth', 'setLogin']),
+    ...mapMutations('user', ['setAuth', 'setLogin', 'setModalOpen']),
     ...mapActions('user', ['userRegister', 'userLogin']),
 
     toggleModal() {
-      if (this.isModalOpen) {
-        this.isModalOpen = false;
+      if (this.getModalOpen) {
+        this.setModalOpen(false);
         this.modalText = "LOGIN"
       }
       else {
         this.formSelected = 'login'
-        this.isModalOpen = true;
+        this.setModalOpen(true);
         this.modalText = "CLOSE"
       }
 
