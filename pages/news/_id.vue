@@ -56,7 +56,6 @@ export default {
   beforeRouteLeave: function(to, from, next) {
     if (to.name != "post") {
       this.setPostData([]);
-      console.log("exit");
     }
     next();
   },

@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _6460cbda = () => interopDefault(import('../pages/edit.vue' /* webpackChunkName: "pages/edit" */))
 const _2d387bdf = () => interopDefault(import('../pages/news/index.vue' /* webpackChunkName: "pages/news/index" */))
 const _c91cecae = () => interopDefault(import('../pages/post.vue' /* webpackChunkName: "pages/post" */))
 const _03bc2bf2 = () => interopDefault(import('../pages/news/_id.vue' /* webpackChunkName: "pages/news/_id" */))
@@ -26,10 +25,6 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/edit",
-    component: _6460cbda,
-    name: "edit"
-  }, {
     path: "/news",
     component: _2d387bdf,
     name: "news"

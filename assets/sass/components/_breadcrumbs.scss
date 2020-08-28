@@ -1,12 +1,13 @@
 .breadcrumbs {
   background-color: $color-bg-tertiary;
   width: 100%;
+  min-width: $site-width + px;
 }
 
 .breadcrumbs__wrapper {
   display: flex;
   list-style: none;
-  padding: 29px 15px 26px;
+  padding: 29px 30px 26px;
 }
 
 .breadcrumbs__item {

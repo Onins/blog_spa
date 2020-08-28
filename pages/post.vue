@@ -35,11 +35,9 @@ export default {
 
   data() {
     return {
-      // isCreate: true,
       postTitle: "",
       postContent: "",
-      postImage: "",
-      // isUpdate: false
+      postImage: ""
     }
   }, 
 
@@ -49,13 +47,15 @@ export default {
         if (this.getIsPosted) {
           if(this.getPostState.isCreate) {
             this.$router.push('/');
+            this.setNotification('Post created successfully.');
           }
           else {
             this.$router.push('/news/'+ this.getPostData.id);
+            this.setNotification('Post updated successfully.');
           }
         }
         else {
-          alert("Unable to create post. Unauthorized login");
+          this.setNotification("Unable to post. Unauthorized login.");
         }
         this.setIsPosted(null);
       }      
@@ -75,13 +75,13 @@ export default {
 
   beforeRouteLeave: function(to, from, next) {
     this.setPostData([]);
-    console.log("delete data");
     next();
   },
   methods: {
     ...mapActions('input',['createPost', 'updatePost']),
     ...mapMutations('input', ['setIsPosted']),
     ...mapMutations('post', ['setPostData', 'setPostState']),
+    ...mapMutations('notification', ['setNotification']),
     
     doPost() {
       if(this.postTitle != "" && this.postContent != "") {

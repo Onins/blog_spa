@@ -51,6 +51,6 @@ export default {
     }
   },
   router: {
-    middleware: ['authenticate']
+    middleware: ['authenticate', 'slider']
   }
 }

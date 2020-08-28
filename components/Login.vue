@@ -79,12 +79,20 @@ export default {
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('auth', this.getAuth);
         this.setLogin("true");
+        this.setNotification('User logged in.');
+      }
+    },
+
+    getRegStat: function() {
+      if(this.getRegStat) {
+        this.setNotification('Registered successfully.');
       }
     }
   },
 
   methods: {
     ...mapMutations('user', ['setAuth', 'setLogin', 'setModalOpen']),
+    ...mapMutations('notification', ['setNotification']), 
     ...mapActions('user', ['userRegister', 'userLogin']),
 
     toggleModal() {
@@ -126,7 +134,7 @@ export default {
         })
         
         this.resetFields();
-        this.toggleModal();        
+        this.toggleModal();   
       }
     },
     submitRegister() {
@@ -169,6 +177,7 @@ export default {
       this.setAuth(false);
       this.setLogin("false");
       this.$router.push('/');
+      this.setNotification('User logged out.');
     },
 
     resetFields() {

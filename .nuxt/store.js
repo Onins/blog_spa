@@ -19,7 +19,9 @@ let store = {};
 
   resolveStoreModules(require('../store/input.js'), 'input.js')
   resolveStoreModules(require('../store/news.js'), 'news.js')
+  resolveStoreModules(require('../store/notification.js'), 'notification.js')
   resolveStoreModules(require('../store/post.js'), 'post.js')
+  resolveStoreModules(require('../store/slide.js'), 'slide.js')
   resolveStoreModules(require('../store/user.js'), 'user.js')
 
   // If the environment supports hot reloading...
@@ -29,7 +31,9 @@ let store = {};
     module.hot.accept([
       '../store/input.js',
       '../store/news.js',
+      '../store/notification.js',
       '../store/post.js',
+      '../store/slide.js',
       '../store/user.js',
     ], () => {
       // Update `root.modules` with the latest definitions.

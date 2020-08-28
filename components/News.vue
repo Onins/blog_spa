@@ -37,17 +37,8 @@ export default {
       loadCount: 0      
     }
   },
-
-  beforeRouteEnter (to, from, next) { 
-    next(vm => { 
-      this.setOffset(6);
-      console.log('set6');
-      next();
-    }) 
-  },
-
   methods: {
-    ...mapMutations('news', ['setPosts', 'setOffset']),
+    ...mapMutations('news', ['setPosts', 'setPostOffset']),
     ...mapActions('news',['loadNews']),
 
     loadMore(){
@@ -58,7 +49,6 @@ export default {
       });
     }
   }
-  
 }
 </script>
 

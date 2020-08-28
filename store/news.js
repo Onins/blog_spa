@@ -19,7 +19,7 @@ export const getters = {
 export const mutations = {
   setPosts: (state, getAllPosts) => (state.allPosts = getAllPosts),
   setBatchPosts: (state, getBatchPosts) => (state.batchPosts = getBatchPosts),
-  setOffset: (state, getPostOffset) => (state.offset = getPostOffset),
+  setPostOffset: (state, getPostOffset) => (state.offset = getPostOffset),
   setLoadMoreState: (state, getLoadMoreState) => (state.loadMoreState = getLoadMoreState)
 }
 
@@ -48,7 +48,7 @@ export const actions = {
       tempNews.push(state.allPosts);
       tempNews.push(response.data.data.posts);
       commit('setPosts', Array.prototype.concat.apply([], tempNews));
-      commit('setOffset', data.offset + data.limit);    
+      commit('setPostOffset', data.offset + data.limit);    
     })
 }
 }
