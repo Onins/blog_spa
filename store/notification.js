@@ -21,7 +21,3 @@ export const mutations = {
   setAlertResult: (state, getAlertResult) => (state.alertResult = getAlertResult),
   setAlertType: (state, getAlertType) => (state.alertType = getAlertType)
 }
-
-// export const action = {
-
-// }

@@ -70,16 +70,27 @@ export default {
   },
 
   computed: {
-    ...mapGetters('user', ['getAuth', 'getRegStat', 'getLogin', 'getModalOpen', 'getRegMsg'])
+    ...mapGetters('user', ['getAuth', 'getRegStat', 'getLogin', 'getModalOpen', 'getRegMsg', 'getLoginStat'])
   },
 
   watch: {
-    getAuth: function () {
-      if (this.getAuth) {
+    getLoginStat: function () {
+      if (this.getLoginStat == true) {
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('auth', this.getAuth);
         this.setLogin("true");
-        this.setNotification('User logged in.');
+        this.setNotification('User logged in.');   
+        this.resetFields();
+        this.toggleModal();
+        this.setLoginStat(null);  
+      }
+
+      else if (this.getLoginStat == false) {
+        localStorage.setItem('isLoggedIn', false);
+        localStorage.setItem('auth', "");
+        this.setLogin("false");
+        this.setNotification('Login Failed!');
+        this.setLoginStat(null);
       }
     },
 
@@ -89,6 +100,7 @@ export default {
         this.resetFields();
         this.setRegStat(null);
         this.switchForm('login');
+        this.setRegStat(null);
       }
       else if(this.getRegStat == false) {
         this.setNotification(this.getRegMsg);
@@ -98,7 +110,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations('user', ['setAuth', 'setLogin', 'setModalOpen', 'setRegStat']),
+    ...mapMutations('user', ['setAuth', 'setLogin', 'setModalOpen', 'setRegStat', 'setLoginStat']),
     ...mapMutations('notification', ['setNotification']), 
     ...mapActions('user', ['userRegister', 'userLogin']),
 
@@ -136,8 +148,8 @@ export default {
 
       if(notEmpty) {
         this.userLogin({
-          email: this.regEmail,
-          pass: this.regPass
+          email: this.loginEmail,
+          pass: this.loginPass
         })       
       }
     },
@@ -166,8 +178,8 @@ export default {
 
       if(notEmpty && matchPass) {
         this.userRegister({
-          email: this.regEmail,
-          pass: this.regPass
+          email: this.regEmail.toString(),
+          pass: this.regPass.toString()
         })        
       }
     },
