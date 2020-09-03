@@ -10,7 +10,7 @@
       <ul class="news-list" >
         <li v-for="(news, i) in this.getAllPosts" :key="i">
           <nuxt-link class="news-item" :to="'/news/'+ news.id">
-            <div class="news-item__image" style="background-image: url('https://via.placeholder.com/150')"></div>
+            <div class="news-item__image" :style="{ backgroundImage: `url('${news.image ? news.image : 'no-image.png'}')`}"></div>          
             <span class="news-item__date" v-if="news.createdAt != null">{{ (news.createdAt).match(/^([\S]+)/g).toString().replace(/[[\]]/g,'') }}</span>
             <p class="news-item__text">{{ news.title }}</p>
           </nuxt-link>

@@ -2,7 +2,7 @@
   <div class="slider">
     <ul class="slider__list" :style="'transform: translateX('+slideTransform+'px)'">
       <li class="slider__list-item" v-for="(slider, index) in this.getSliderPosts" :key="index">
-        <div class="slider__image-wrapper" :style="'background-image: url(https://via.placeholder.com/1920x1080); width: '+ getSliderWidth+'px'">
+        <div class="slider__image-wrapper" :style="{ backgroundImage: `url('${slider.image ? slider.image : 'no-image.png'}')`, width: getSliderWidth + 'px' }">
           <div class="slider__wrapper">
             <h2 class="slider__title">
               <span class="slider__title-text"> {{ slider.title }} </span>

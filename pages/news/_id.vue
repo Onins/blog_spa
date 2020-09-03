@@ -8,7 +8,7 @@
         </div>
         <p class="post__date">{{ getPostData.createdAt ? (getPostData.createdAt).match(/^([\S]+)/g).toString().replace(/[[\]]/g,'') : "" }}</p>
         <h2 class="post__title">{{ getPostData.title }}</h2>
-        <div class="post__image" style="background-image: url('https://via.placeholder.com/1120x540')"></div>
+        <div class="post__image" :style="{ backgroundImage: `url('${getPostData.image ? getPostData.image : '/no-image.png'}')`}"></div>
         <p class="post__content">{{ getPostData.content}}</p>
         <div class="post-comment">
           <h3 class="post-comment__header">COMMENT</h3>

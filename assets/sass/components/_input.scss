@@ -51,6 +51,7 @@
   height: 540px;
   margin-bottom: 36px;
   position: relative;
+  background-color: #D6D6D6;
 }
 
 .input__content {
@@ -78,4 +79,8 @@
   color: $color-text-secondary;
   width: 260px;
   cursor: pointer;
+}
+
+.input__button--hide {
+ display: none;
 }

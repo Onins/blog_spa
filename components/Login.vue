@@ -64,7 +64,7 @@ export default {
   head () {
     return {
       bodyAttrs: {
-        class: this.getModalOpen ? 'is-open' : ''
+        class: this.getModalOpen ? 'scroll-lock' : ''
       }
     }
   },

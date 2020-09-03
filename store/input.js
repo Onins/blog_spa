@@ -15,7 +15,7 @@ export const mutations = {
 export const actions = {
   async createPost({commit}, data) {
     let jsonData = JSON.stringify({
-      query: 'mutation {\n  addPost(\n		post: {\n      title: "'+data.title+'",\n      content: "'+data.content+'",\n      image: ""\n    }\n  ) {\n    id, title, content\n  }\n}',
+      query: 'mutation {\n  addPost(\n		post: {\n      title: "'+data.title+'",\n      content: "'+data.content+'",\n      image: "'+data.image+'"\n    }\n  ) {\n    id, title, content\n  }\n}',
       variables: {}
     });
   
