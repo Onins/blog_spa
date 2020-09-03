@@ -8,7 +8,7 @@
           <a @click="doAlert('create')" v-if="getPostState.isCreate" class="input__edit-link">Cancel</a>          
           <a @click="doAlert('edit')" v-if="getPostState.isUpdate" class="input__edit-link">Cancel</a>
         </div>
-        <p class="input__date" v-if="getPostState.isCreate">2019.06.19</p>
+        <p class="input__date" v-if="getPostState.isCreate">{{ this.doGetDate() }}</p>
         <p class="input__date" v-if="getPostState.isUpdate">{{ getPostData.createdAt ? (getPostData.createdAt).match(/^([\S]+)/g).toString().replace(/[[\]]/g,'') : ""  }}</p>
         <textarea class="input__title" ref="ctitle" placeholder="Title" v-model="postTitle" />
         <div class="input__image" :style="{ backgroundImage: 'url(' + postImage + ')' }">
@@ -111,6 +111,12 @@ export default {
     ...mapMutations("input", ["setIsPosted"]),
     ...mapMutations("post", ["setPostData", "setPostState"]),
     ...mapMutations("notification", ["setNotification", "setAlertOpen", "setAlertType", "setAlertMsg", "setAlertResult"]),
+
+    doGetDate() {
+      let date = new Date();
+
+      return date.getFullYear()+'.'+("0" + (date.getMonth() + 1)).slice(-2)+'.'+("0" + (date.getDate())).slice(-2);
+    },
 
     previewFiles(event) {
       let that = this
