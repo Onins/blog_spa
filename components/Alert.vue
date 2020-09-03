@@ -16,14 +16,6 @@ export default {
     ...mapGetters("notification", ["getAlertOpen", "getAlertMsg"])
   },
 
-  head () {
-    return {
-      bodyAttrs: {
-        class: this.getAlertOpen ? 'scroll-lock' : ''
-      }
-    }
-  },
-
   methods: {
     ...mapMutations("notification", ["setAlertResult", "setAlertOpen", "setAlertMsg"]),
 

@@ -22,9 +22,41 @@ export default {
     Notification,
     Alert
   },
-
   computed: {
-    ...mapGetters("notification", ["getAlertOpen"]),
+    ...mapGetters('user', ['getModalOpen']),
+    ...mapGetters('notification', ['getAlertOpen'])
+  },
+  data() {
+    return {
+      bodyClass: ""
+    }
+  },
+  head () {
+    return {
+      bodyAttrs: {
+        class: this.bodyClass,
+      }
+    }
+  },
+
+  watch: {
+    getModalOpen: function() {
+      if(this.getModalOpen) {
+        this.bodyClass = "scroll-lock";
+      }
+      else {
+        this.bodyClass = "";
+      }
+    }, 
+
+    getAlertOpen: function() {
+      if(this.getAlertOpen) {
+        this.bodyClass = "scroll-lock";
+      }
+      else {
+        this.bodyClass = "";
+      }
+    }
   },
 }
 </script>

@@ -8,7 +8,8 @@
           <a @click="doAlert('create')" v-if="getPostState.isCreate" class="input__edit-link">Cancel</a>          
           <a @click="doAlert('edit')" v-if="getPostState.isUpdate" class="input__edit-link">Cancel</a>
         </div>
-        <p class="input__date">2019.06.19</p>
+        <p class="input__date" v-if="getPostState.isCreate">2019.06.19</p>
+        <p class="input__date" v-if="getPostState.isUpdate">{{ getPostData.createdAt ? (getPostData.createdAt).match(/^([\S]+)/g).toString().replace(/[[\]]/g,'') : ""  }}</p>
         <textarea class="input__title" ref="ctitle" placeholder="Title" v-model="postTitle" />
         <div class="input__image" :style="{ backgroundImage: 'url(' + postImage + ')' }">
           <label class="input__button">
@@ -41,7 +42,8 @@ export default {
     return {
       postTitle: "",
       postContent: "",
-      postImage: ""
+      postImage: "",
+      postDate: ""
     };
   },
 
@@ -91,6 +93,7 @@ export default {
     this.postTitle = this.getPostData.title == undefined ? "" : this.getPostData.title;
     this.postContent = this.getPostData.content == undefined ? "" : this.getPostData.content;
     this.postImage = this.getPostData.image == undefined ? "" : this.getPostData.image;
+    this.postDate = this.getPostData.createdAt == undefined ? "" : this.getPostData.createdAt;
 
     if (this.postTitle) {
       this.setPostState({ isCreate: false, isUpdate: true });

@@ -61,14 +61,6 @@ export default {
     }
   },
 
-  head () {
-    return {
-      bodyAttrs: {
-        class: this.getModalOpen ? 'scroll-lock' : ''
-      }
-    }
-  },
-
   computed: {
     ...mapGetters('user', ['getAuth', 'getRegStat', 'getLogin', 'getModalOpen', 'getRegMsg', 'getLoginStat'])
   },
