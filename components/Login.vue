@@ -70,7 +70,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('user', ['getAuth', 'getRegStat', 'getLogin', 'getModalOpen'])
+    ...mapGetters('user', ['getAuth', 'getRegStat', 'getLogin', 'getModalOpen', 'getRegMsg'])
   },
 
   watch: {
@@ -84,14 +84,21 @@ export default {
     },
 
     getRegStat: function() {
-      if(this.getRegStat) {
+      if(this.getRegStat == true) {
         this.setNotification('Registered successfully.');
+        this.resetFields();
+        this.setRegStat(null);
+        this.switchForm('login');
+      }
+      else if(this.getRegStat == false) {
+        this.setNotification(this.getRegMsg);
+        this.setRegStat(null);
       }
     }
   },
 
   methods: {
-    ...mapMutations('user', ['setAuth', 'setLogin', 'setModalOpen']),
+    ...mapMutations('user', ['setAuth', 'setLogin', 'setModalOpen', 'setRegStat']),
     ...mapMutations('notification', ['setNotification']), 
     ...mapActions('user', ['userRegister', 'userLogin']),
 
@@ -131,10 +138,7 @@ export default {
         this.userLogin({
           email: this.regEmail,
           pass: this.regPass
-        })
-        
-        this.resetFields();
-        this.toggleModal();   
+        })       
       }
     },
     submitRegister() {
@@ -164,10 +168,7 @@ export default {
         this.userRegister({
           email: this.regEmail,
           pass: this.regPass
-        })
-
-        this.resetFields();
-        this.toggleModal();
+        })        
       }
     },
 

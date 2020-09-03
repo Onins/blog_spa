@@ -3,7 +3,8 @@ import axios from 'axios'
 
 export const state = () => ({
   isLoggedIn: false,
-  isRegistered: false,
+  isRegistered: null,
+  regMessage: "",
   isModalOpen: false,
   authCode: ""
   
@@ -13,6 +14,7 @@ export const getters = {
   getLogin: (state) => state.isLoggedIn, 
   getAuth: (state) => state.authCode,
   getRegStat: (state) => state.isRegistered,
+  getRegMsg: (state) => state.regMessage,
   getModalOpen: (state) => state.isModalOpen,
 }
 
@@ -20,6 +22,7 @@ export const mutations = {
   setLogin: (state, getLogin) => (state.isLoggedIn = getLogin),
   setAuth: (state, getAuth) => (state.authCode = getAuth),
   setRegStat: (state, getRegStat) => (state.isRegistered = getRegStat),
+  setRegMsg: (state, getRegMsg) => (state.regMessage = getRegMsg),
   setModalOpen: (state, getModalOpen) => (state.isModalOpen = getModalOpen)
 }
 
@@ -60,7 +63,14 @@ export const actions = {
 
     axios(config)
     .then((response)=> {
-      commit('setRegStat', response.data.data.register);
+      if(response.data.errors == undefined) {
+        commit('setRegMsg', "");
+        commit('setRegStat', true);
+      }
+      else {
+        commit('setRegMsg', response.data.errors[0].message);
+        commit('setRegStat', false);
+      }
     });
   }
 }

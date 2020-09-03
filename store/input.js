@@ -24,7 +24,7 @@ export const actions = {
       url: 'http://localhost:4000/graphql',
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': data.authHeader
+        'Authorization': "data.authHeader"
       },
       data : jsonData
     };
