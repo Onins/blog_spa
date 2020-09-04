@@ -66,7 +66,7 @@ export default {
 
     doGetTime(data) {
       let date = new Date();
-      let postDate = new Date(data.match(/^([\S]+)/g).toString().replace(/[[\]]/g,''));
+      let postDate = new Date(data);
 
       let diffTime = Math.abs(date - postDate);
       
@@ -95,7 +95,7 @@ export default {
       }
 
       if (diffMonth == 0 && diffDays == 0 && diffHour == 0 && diffMin == 0) {
-        result =  diffSec > 1 ? diffSec + " seconds ago" : diffSec + " second ago" ;
+        result =  diffSec > 1 ? diffSec + " seconds ago" : "Just now" ;
       }
 
       return result;
