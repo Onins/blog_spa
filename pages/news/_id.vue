@@ -95,7 +95,7 @@ export default {
       }
 
       if (diffMonth == 0 && diffDays == 0 && diffHour == 0 && diffMin == 0) {
-        result =  diffSec > 1 ? diffSec + " seconds ago" : "Just now" ;
+        result =  diffSec > 1 ? " Few seconds ago" : "Just now" ;
       }
 
       return result;

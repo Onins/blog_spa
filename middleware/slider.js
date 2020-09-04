@@ -3,7 +3,7 @@ import axios from 'axios'
 export default function ({store}) {
   let result;
   let data = JSON.stringify({
-    query: 'query{\n  posts(\n    pagination: {\n      limit: 3,\n      offset: 0\n    }\n  ){\n    id, title, image, createdAt\n  }\n}',
+    query: 'query{\n  posts(\n    pagination: {\n      limit: '+store.state.slide.sliderLimit+',\n      offset: 0\n    }\n  ){\n    id, title, image, createdAt\n  }\n}',
     variables: {}
   });
 

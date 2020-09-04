@@ -81,7 +81,7 @@ export const actions = {
         commit('setRegStat', true);
       }
       else {
-        commit('setRegMsg', response.data.errors[0].message);
+        commit('setRegMsg', response.data.errors[0].message + ". User exist!");
         commit('setRegStat', false);
       }
     });

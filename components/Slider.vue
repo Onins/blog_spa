@@ -17,9 +17,7 @@
       <span class="slider__nav-right" @click="doSlide('right')"></span>
     </div>
     <ul class="slider__pagination">
-      <li class="slider__pagination-item" @click="doSlideTo(1)" :class="slideCount == 1 ? 'is-active' : ''"></li>
-      <li class="slider__pagination-item" @click="doSlideTo(2)" :class="slideCount == 2 ? 'is-active' : ''"></li>
-      <li class="slider__pagination-item" @click="doSlideTo(3)" :class="slideCount == 3 ? 'is-active' : ''"></li>
+      <li class="slider__pagination-item" v-for="(slider, index) in this.getSliderPosts" :key="index" @click="doSlideTo(index +1)" :class="slideCount == index+1 ? 'is-active' : ''"></li>
     </ul>
   </div>
 </template>
@@ -29,13 +27,12 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('slide', ['getSliderWidth', 'getSliderPosts'])
+    ...mapGetters('slide', ['getSliderWidth', 'getSliderPosts', 'getSliderLimit'])
   },
   data() {
     return {
       slideCount: 1,
       slideTransform: 0,
-      totalSlides:  3
     }
   },
   middleware: ['slider'],
@@ -49,14 +46,10 @@ export default {
 
       }
       else if (data == "right"){  
-        if (this.slideCount != this.totalSlides) {
+        if (this.slideCount != this.getSliderLimit) {
           this.slideTransform = this.slideTransform - screen.width;
           this.slideCount++;
         }
-        // else {
-        //   this.slideCount = 1;
-        //   this.slideTransform = 0;
-        // }
       }
     },
     doSlideTo(data) {
