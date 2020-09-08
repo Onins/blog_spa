@@ -35,7 +35,7 @@ export default {
     ...mapGetters("user", ["getAuth", "getLogin"]),
     ...mapGetters("input", ["getIsPosted"]),
     ...mapGetters("notification", ["getAlertOpen", "getAlertType", "getAlertResult"]),
-    ...mapGetters("post", ["getPostData", "getPostState"]),
+    ...mapGetters("post", ["getPostData", "getPostState", "getLastPost"]),
   },
 
   data() {
@@ -52,7 +52,7 @@ export default {
       if (this.getIsPosted != null) {
         if (this.getIsPosted) {
           if (this.getPostState.isCreate) {
-            this.$router.push("/");
+            this.fetchLastPost();
             this.setNotification("Post created successfully.");
           } else {
             this.$router.push("/news/" + this.getPostData.id);
@@ -64,6 +64,12 @@ export default {
         this.setIsPosted(null);
       }
     },
+    getLastPost: function () {
+      if (this.getLastPost != "") {
+        this.$router.push("/news/" + this.getLastPost[0].id);
+        this.setLastPost("");
+      }
+    }, 
 
     getAlertResult: function () {
       if(this.getAlertResult == true && this.getAlertType == "edit") {
@@ -108,8 +114,9 @@ export default {
   },
   methods: {
     ...mapActions("input", ["createPost", "updatePost"]),
+    ...mapActions("post", ["fetchLastPost"]),
     ...mapMutations("input", ["setIsPosted"]),
-    ...mapMutations("post", ["setPostData", "setPostState"]),
+    ...mapMutations("post", ["setPostData", "setPostState", "setLastPost"]),
     ...mapMutations("notification", ["setNotification", "setAlertOpen", "setAlertType", "setAlertMsg", "setAlertResult"]),
 
     doGetDate() {
